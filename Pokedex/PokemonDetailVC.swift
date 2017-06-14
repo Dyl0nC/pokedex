@@ -61,4 +61,26 @@ class PokemonDetailVC: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
+    @IBOutlet weak var segControl: UISegmentedControl!
+    
+    @IBAction func segmentedController(_ sender: UISegmentedControl) {
+        var poke: Pokemon!
+        
+        
+        poke = self.pokemon
+        
+        segControl.selectedSegmentIndex = 0
+        
+        performSegue(withIdentifier: "PokemonMovesVC", sender: poke)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "PokemonMovesVC" {
+            if let movesVC = segue.destination as? PokemonMovesVC {
+                if let poke = sender as? Pokemon {
+                    movesVC.pokemon = poke
+                }
+            }
+        }
+    }
 }
