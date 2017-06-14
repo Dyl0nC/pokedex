@@ -66,10 +66,7 @@ class PokemonDetailVC: UIViewController {
     @IBAction func segmentedController(_ sender: UISegmentedControl) {
         var poke: Pokemon!
         
-        
         poke = self.pokemon
-        
-        segControl.selectedSegmentIndex = 0
         
         performSegue(withIdentifier: "PokemonMovesVC", sender: poke)
     }

@@ -25,6 +25,11 @@ class Pokemon {
     private var _nextEvolutionLvl: String!
     private var _pokeURL: String!
     
+    private var _moveOne: String!
+    private var _moveTwo: String!
+    private var _moveThree: String!
+    private var _moveFour: String!
+    
     var name: String {
         return _name
     }
@@ -101,6 +106,34 @@ class Pokemon {
             _nextEvolutionLvl = ""
         }
         return _nextEvolutionLvl
+    }
+    
+    var moveOne: String {
+        if _moveOne == nil {
+            _moveOne = ""
+        }
+        return _moveOne
+    }
+    
+    var moveTwo: String {
+        if _moveTwo == nil {
+            _moveTwo = ""
+        }
+        return _moveTwo
+    }
+    
+    var moveThree: String {
+        if _moveThree == nil {
+            _moveThree = ""
+        }
+        return _moveThree
+    }
+    
+    var moveFour: String {
+        if _moveFour == nil {
+            _moveFour = ""
+        }
+        return _moveFour
     }
     
     init(name: String, pokedexID: Int) {
@@ -191,11 +224,37 @@ class Pokemon {
                         }
                     }
                 }
+                
+                if let moves = dict["moves"] as? [Dictionary<String, Any>] , moves.count > 0 {
+                    
+                    if let firstMove = moves[0]["name"] {
+                        self._moveOne = "\(firstMove)".capitalized
+                    }
+                    
+                    if let secondMove = moves[1]["name"] {
+                        self._moveTwo = "\(secondMove)".capitalized
+                    }
+                    
+                    if let thirdMove = moves[2]["name"] {
+                        self._moveThree = "\(thirdMove)".capitalized
+                    }
+                    
+                    if let fourthMove = moves[3]["name"] {
+                        self._moveFour = "\(fourthMove)".capitalized
+                    }
+                    
+                    
+                } else {
+                    self._moveOne = ""
+                    self._moveTwo = ""
+                    self._moveThree = ""
+                    self._moveFour = ""
+                }
+                
+                
             }
-            
             completed()
         }
-        
     }
     
 }
